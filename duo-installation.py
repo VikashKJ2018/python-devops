@@ -9,12 +9,11 @@
 import subprocess
 import os
 
-os.environ["http_proxy"]="http://<proxy-ip-address>:80"
-os.environ["https_proxy"]="https://<proxy-ip-address>:80"
-subprocess.call("yum -y install gcc openssl-devel pam-devel", shell=True)
-subprocess.call("wget https://dl.duosecurity.com/duo_unix-latest.tar.gz", shell=True)
-subprocess.call("tar zxf duo_unix-latest.tar.gz", shell=True)
-os.chdir("duo_unix-1.10.1")
-subprocess.call("pwd", shell=True)
-subprocess.call("./configure --with-pam --prefix=/usr && make && sudo make install", shell=True)
+os.environ["http_proxy"]="http://<proxy-ip-address>:80"    #Exporting the proxy server IP since the download requires internet access
+os.environ["https_proxy"]="https://<proxy-ip-address>:80"  
+subprocess.call("yum -y install gcc openssl-devel pam-devel", shell=True) #Installation of Pre-requisite
+subprocess.call("wget https://dl.duosecurity.com/duo_unix-latest.tar.gz", shell=True) # Download of the duo software
+subprocess.call("tar zxf duo_unix-latest.tar.gz", shell=True) #Untar the downloaded package
+os.chdir("duo_unix-1.10.1") #Changing the directory
+subprocess.call("./configure --with-pam --prefix=/usr && make && sudo make install", shell=True) #Configure and Make Install
 
